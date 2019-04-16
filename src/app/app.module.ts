@@ -23,9 +23,6 @@ import { CommentsPublicationsComponent } from './components/user/comments-public
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { ProfileEditComponent } from './components/user/profile-edit/profile-edit.component';
 
-// scrollreveal
-import { NgsRevealModule } from 'ng-scrollreveal';
-
 // spinner
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -56,7 +53,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgsRevealModule,
     NgxSpinnerModule,
     NgxPaginationModule,
   ],
