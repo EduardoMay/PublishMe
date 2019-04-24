@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  public currentUser = {
+    status: false,
+    name: 'Prueba'
+  };
+
+  public dataUser = {
+    name: 'Prueba',
+    photoUrl: null
+  };
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  // CERRAR SESION
+  public onLogout() {}
 
 }
