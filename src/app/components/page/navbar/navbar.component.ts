@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,22 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  public currentUser = {
-    status: false,
-    name: 'Prueba'
-  };
-
-  public dataUser = {
-    name: 'Prueba',
-    photoUrl: null
-  };
-
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
-
-  // CERRAR SESION
-  public onLogout() {}
 
 }
