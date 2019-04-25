@@ -8,6 +8,9 @@ import { UsersComponent } from '../components/admin/users/users.component';
 import { Page404Component } from '../components/page/page404/page404.component';
 import { NoticeOfPrivacyComponent } from '../components/page/notice-of-privacy/notice-of-privacy.component';
 import { DetailPublicactionComponent } from '../components/page/detail-publicaction/detail-publicaction.component';
+import { LoginComponent } from '../components/auth/login/login.component';
+import { RegisterComponent } from '../components/auth/register/register.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,10 +19,12 @@ const routes: Routes = [
   { path: 'ver-publicacion/:id', component: DetailPublicactionComponent },
   // { path: 'buscar'},
   { path: 'politicas-de-privacidad', component: NoticeOfPrivacyComponent },
-  { path: 'user/perfil/:id', component: ProfileComponent },
-  { path: 'user/editar-perfil/:id', component: ProfileEditComponent },
-  { path: 'admin/lista-publicaciones', component: ListPublicationsComponent },
-  { path: 'admin/usuarios', component: UsersComponent },
+  { path: 'user/perfil/:id', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'user/editar-perfil/:id', component: ProfileEditComponent, canActivate: [AuthGuard] },
+  { path: 'admin/lista-publicaciones', component: ListPublicationsComponent, canActivate: [AuthGuard] },
+  { path: 'admin/usuarios', component: UsersComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent},
+  { path: 'registro', component: RegisterComponent},
   { path: '**', component: Page404Component }
 ];
 
