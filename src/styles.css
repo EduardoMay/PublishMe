@@ -6,3 +6,7 @@
 .bg_primary{
   background-color: var(--bg-primary);
 }
+
+.cursor-pointer{
+  cursor: pointer;
+}
