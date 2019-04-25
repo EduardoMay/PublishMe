@@ -29,6 +29,15 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 // ngx-pagination
 import { NgxPaginationModule } from 'ngx-pagination';
 
+// firebase
+import { firebase } from '../environments/firebase';
+export const firebaseConfig = firebase.firebaseConfig;
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestore, FirestoreSettingsToken } from '@angular/fire/firestore';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,8 +64,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppRoutingModule,
     NgxSpinnerModule,
     NgxPaginationModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
   ],
-  providers: [],
+  providers: [
+    AngularFireAuth,
+    AngularFirestore,
+    { provide: FirestoreSettingsToken, useValue: {}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
