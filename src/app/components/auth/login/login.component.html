@@ -1,19 +1,29 @@
 <div class="container">
   <div class="row align-items-center" style="height: 80vh;">
-    <div class="col-md-8 border shadow p-4 m-auto">
+    <div class="col-md-5 border shadow p-4 m-auto">
       <h1 class="text-center">Inicio de sesion</h1>
-      <form>
+      <hr>
+
+      <form #formLoginUser="ngForm" (submit)="verificationForm(formLoginUser)">
+
         <div class="form-group">
-          <label for="exampleInputEmail1">Correo</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          <label for="emailUser">Correo</label>
+          <input type="email" class="form-control" id="emailUser" aria-describedby="emailHelp" placeholder="Correo"
+          [ngClass]="{'is-invalid': textEmail}"
+          name="emailUser" [(ngModel)]="emailUser" required>
+          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
         </div>
+
         <div class="form-group">
-          <label for="exampleInputPassword1">Contraseña</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <label for="passwordUser">Contraseña</label>
+          <input type="password" class="form-control" id="passwordUser" placeholder="Contraseña"
+          [ngClass]="{'is-invalid': textPassword}"
+          name="passwordUser" [(ngModel)]="passwordUser" required>
         </div>
+
         <button type="submit" class="btn btn-primary">Iniciar sesion</button>
       </form>
+
     </div>
   </div>
 </div>

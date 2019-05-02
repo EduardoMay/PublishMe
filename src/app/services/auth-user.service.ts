@@ -27,6 +27,16 @@ export class AuthUserService {
     }
 
   /**
+   * iniciar sesion
+  */
+  public loginEmailPasswordUser(email: string, password: string) {
+    return new Promise( (resolve, reject) => {
+      this._afService.auth.signInWithEmailAndPassword(email, password)
+        .then( userData => resolve(userData), err => reject(err));
+    });
+  }
+
+  /**
    * registrar directamente a la base de datos
   */
   public registerUser( email: string, password: string, name: string ) {
