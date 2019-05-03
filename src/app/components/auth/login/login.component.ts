@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   private textEmail = false;
   private textPassword = false;
   private validationEmail = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+  private validationText = /([a-zA-Z0-9])/i;
 
   constructor(private _authService: AuthUserService,
               private router: Router) { }
@@ -24,22 +25,12 @@ export class LoginComponent implements OnInit {
 
   public verificationForm( formLoginUser: NgForm ) {
 
-  /**
-   * VERIFICAR EMAIL NO ESTE VACIO Y VERIFICADO
-   * VERIFICAR EMAIL Y PASSWORD ESTEN VACIOS
-  */
-    console.log(formLoginUser);
+    // console.log(formLoginUser);
 
     if ( formLoginUser.valid === true ) {
       if ( this.validationEmail.test(this.emailUser) ) {
 
-        this._authService.loginEmailPasswordUser(this.emailUser, this.passwordUser)
-          .then( res => {
-            this.onLoginRedirect();
-          })
-          .catch( err => {
-            console.log('Error al iniciar sesion', err.message);
-          });
+        this.loginUserEmailPassword();
 
       } else {
         this.textEmail = true;
@@ -53,6 +44,8 @@ export class LoginComponent implements OnInit {
 
       if (this.passwordUser === '') {
         this.textPassword = true;
+      } else if ( !this.validationText.test(this.passwordUser) ) {
+        this.textPassword = true;
       }
     }
 
@@ -60,6 +53,19 @@ export class LoginComponent implements OnInit {
       this.textEmail = false;
       this.textPassword = false;
     }, 3000);
+  }
+
+  /**
+   * Login con email y password
+  */
+  private loginUserEmailPassword() {
+    this._authService.loginEmailPasswordUser(this.emailUser, this.passwordUser)
+      .then( res => {
+        this.onLoginRedirect();
+      })
+      .catch( err => {
+        console.log('Error al iniciar sesion', err.message);
+      });
   }
 
   /**
