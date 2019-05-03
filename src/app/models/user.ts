@@ -7,6 +7,7 @@ export interface Roles {
 export interface UserInterface {
   id?: string;
   name?: string;
+  user?: string;
   email?: string;
   password?: string;
   idPhoto?: string;
