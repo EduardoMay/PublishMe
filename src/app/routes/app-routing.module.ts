@@ -11,6 +11,7 @@ import { DetailPublicactionComponent } from '../components/page/detail-publicact
 import { LoginComponent } from '../components/auth/login/login.component';
 import { RegisterComponent } from '../components/auth/register/register.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { AdminComponent } from '../components/admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'politicas-de-privacidad', component: NoticeOfPrivacyComponent },
   { path: 'user/perfil/:id', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'user/editar-perfil/:id', component: ProfileEditComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'admin/lista-publicaciones', component: ListPublicationsComponent, canActivate: [AuthGuard] },
   { path: 'admin/usuarios', component: UsersComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent},

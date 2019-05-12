@@ -23,6 +23,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { CommentsPublicationsComponent } from './components/user/comments-publications/comments-publications.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { ProfileEditComponent } from './components/user/profile-edit/profile-edit.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 // spinner
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -58,7 +59,8 @@ import { AngularFirestore, FirestoreSettingsToken } from '@angular/fire/firestor
     RegisterComponent,
     CommentsPublicationsComponent,
     ProfileComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
