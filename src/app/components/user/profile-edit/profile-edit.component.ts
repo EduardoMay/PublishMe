@@ -3,6 +3,7 @@ import { AuthUserService } from 'src/app/services/auth-user.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { NgForm } from '@angular/forms';
+import { UserInterface } from 'src/app/models/user';
 
 @Component({
   selector: 'app-profile-edit',
@@ -11,11 +12,15 @@ import { NgForm } from '@angular/forms';
 })
 export class ProfileEditComponent implements OnInit {
 
+  private IDUSER: string;
+
+  // datos del formulario
   public name = '';
   public lastName = '';
   public userName = '';
   public date = '';
 
+  // poder cambiar de pestaña
   public switchPersonalDate = true;
   public switchProfilePhoto = false;
 
@@ -26,6 +31,8 @@ export class ProfileEditComponent implements OnInit {
     date: false
   };
 
+  private dataPersonal: UserInterface = {};
+
   private validationText = /([a-zA-Z])/i;
 
   constructor(private _authService: AuthUserService,
@@ -33,14 +40,29 @@ export class ProfileEditComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.getCurrentUser();
   }
 
+  // obtener la informacion del usuario
+  private getCurrentUser() {
+    this._authService.isAuth().subscribe( userData => {
+      if ( userData ) {
+        this.IDUSER = userData.uid;
+      }
+    });
+  }
+
+  // validar el formulario
   public validateFormPersonalDate( formPersonalDate: NgForm ) {
     console.log(formPersonalDate);
     if ( formPersonalDate.valid === true) {
       // funcion para guardar los datos
+      this.dataPersonal.name = this.name;
+      this.dataPersonal.lastname = this.lastName;
+      this.dataPersonal.username = this.userName;
+      this.dataPersonal.date = this.date;
 
-
+      this.savePersonalDate( this.dataPersonal );
     } else {
       // Validation input "name"
       if ( this.name === '' ) {
@@ -77,7 +99,9 @@ export class ProfileEditComponent implements OnInit {
     }, 3000);
   }
 
-  private savePersonalDate() {}
+  private savePersonalDate( dataPersonal: {} ) {
+    this._userServices.updateInfoUser(this.IDUSER, dataPersonal);
+  }
 
   public buttonPersonalDate() {
     this.switchPersonalDate = !this.switchPersonalDate;

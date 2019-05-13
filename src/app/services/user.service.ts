@@ -53,4 +53,14 @@ export class UserService {
       }
     }));
   }
+
+  // actualizar la informacion del usuario
+  public updateInfoUser( idUser, data ) {
+    const userRef = this.angularFirestore.doc<UserInterface>(`users/${idUser}`);
+    userRef.update(data).then( () => {
+      return console.log('GUardado');
+    }).catch( err => {
+      return console.log('Error al guardar', err);
+    });
+  }
 }
