@@ -1,10 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 :root{
   --bg-primary: #007cff;
+  --bg-light: #F7FBFF;
 }
 
 .bg_primary{
   background-color: var(--bg-primary);
+}
+
+.bg_light{
+  background-color: var(--bg-light);
 }
 
 .cursor-pointer{
