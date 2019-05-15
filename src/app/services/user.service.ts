@@ -63,4 +63,27 @@ export class UserService {
       return console.log('Error al guardar', err);
     });
   }
+
+  // guardar url de la foto de perfil
+  public updateProfileUrl(userID: string, photoUrl: string, idPhoto: string) {
+
+    if ( idPhoto === null) {
+      const userRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(`users/${userID}`);
+
+      const data: UserInterface = {
+        photoUrl: photoUrl
+      };
+
+      return userRef.set(data, {merge: true});
+    } else {
+      const userRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(`users/${userID}`);
+
+      const data: UserInterface = {
+        idPhoto: idPhoto,
+        photoUrl: photoUrl
+      };
+
+      return userRef.set(data, {merge: true});
+    }
+  }
 }

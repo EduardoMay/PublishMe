@@ -78,35 +78,44 @@
 
     </div>
 
-    <!-- <div class="col-md-8" *ngIf="switchProfilePhoto">
+    <div class="col-md-8" *ngIf="switchProfilePhoto">
       
       <h2><small>Foto de Perfil</small></h2>
 
       <div class="dropdown-divider"></div>
 
-      <form #formPersonalDate="ngForm" (submit)="validateFormPersonalDate(formPersonalDate)">
+      <form (submit)="uploadPhotoUser()">
 
         <div class="form-group">
-          <input type="file" class="form-control" accept=".png .jpg"
-          >
+          <input type="file" class="form-control" accept=".PNG .jpg"
+          (change)="savingPhotoToFIrestore($event)">
         </div>
 
         <div class="progress mb-3">
-          <div
+          <div [style.width]="(uploadPercent | async) + '%'"
           class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-            %
+            {{ uploadPercent | async }}
           </div>
         </div>
 
+        <input type="hidden" #imageUser [value]="urlImage | async">
+
         <div class="d-flex flex-row-reverse bd-highlight">
+
           <div class="p-2 bd-highlight">
-            <button type="submit" class="btn btn-outline-primary">Guardar</button>
+            <button *ngIf="urlImage | async; else btnDisable"
+              type="submit" class="btn btn-lg btn-primary btn-block">Guardar</button>
           </div>
+
+          <ng-template #btnDisable>
+            <button type="submit" disabled=true class="btn btn-lg btn-secondary btn-block">Guardar</button>
+          </ng-template>
+
         </div>
 
       </form>
 
-    </div>   -->
+    </div>
 
   </div>
   
