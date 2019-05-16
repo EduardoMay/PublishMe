@@ -1,27 +1,38 @@
 <div class="container">
   <div class="row align-items-center" style="height: 80vh;">
-    <div class="col-md-5 border shadow p-4 m-auto">
+    <div class="col-md-5 border rounded-lg shadow p-4 m-auto">
       <h1 class="text-center">Inicio de sesion</h1>
       <hr>
 
       <form #formLoginUser="ngForm" (submit)="verificationForm(formLoginUser)">
 
-        <div class="form-group">
-          <label for="emailUser">Correo</label>
-          <input type="email" class="form-control" id="emailUser" aria-describedby="emailHelp" placeholder="Correo"
-          [ngClass]="{'is-invalid': textEmail}"
-          name="emailUser" [(ngModel)]="emailUser" required>
+        <div class="input-group mb-3">
+
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="email"><i class="fa fa-envelope"></i></span>
+          </div>
+
+          <input type="email" class="form-control" id="emailUser" aria-describedby="email" placeholder="Correo"
+            [ngClass]="{'is-invalid': textEmail}"
+            name="emailUser" [(ngModel)]="emailUser" required>
           <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
         </div>
 
-        <div class="form-group">
-          <label for="passwordUser">Contraseña</label>
-          <input type="password" class="form-control" id="passwordUser" placeholder="Contraseña"
-          [ngClass]="{'is-invalid': textPassword}"
-          name="passwordUser" [(ngModel)]="passwordUser" required>
+        <div class="input-group mb-4">
+
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="passwordUser"><i class="fa fa-key"></i></span>
+          </div>
+
+          <input type="password" class="form-control" id="passwordUser" aria-describedby="passwordUser" placeholder="Contraseña"
+            [ngClass]="{'is-invalid': textPassword}"
+            name="passwordUser" [(ngModel)]="passwordUser" required>
+
         </div>
 
-        <button type="submit" class="btn btn-primary">Iniciar sesion</button>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Iniciar sesion</button>
+        </div>
       </form>
 
     </div>
