@@ -3,7 +3,7 @@
 
 <div class="container mt-4 border shadow rounded p-3">
 
-  <h3>Panel del Administrador <small> -Nombre- </small></h3>
+  <h3>Panel del Administrador <small> {{_DATAUSER.username}} </small></h3>
 
 </div>
 
@@ -22,10 +22,14 @@
   </ul>
 
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-      Usuarios
+
+    <div class="tab-pane fade show active p-3" id="home" role="tabpanel" aria-labelledby="home-tab">
+      
+      <app-users></app-users>
+
     </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+    <div class="tab-pane fade p-3" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       Publicaciones
     </div>
   </div>
