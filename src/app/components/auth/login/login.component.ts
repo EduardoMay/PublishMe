@@ -12,8 +12,8 @@ export class LoginComponent implements OnInit {
 
   public emailUser = '';
   public passwordUser = '';
-  private textEmail = false;
-  private textPassword = false;
+  public textEmail = false;
+  public textPassword = false;
   private validationEmail = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
   private validationText = /([a-zA-Z0-9])/i;
 
