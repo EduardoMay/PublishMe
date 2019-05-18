@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { AuthUserService } from 'src/app/services/auth-user.service';
+import { UserInterface } from 'src/app/models/user';
 
 @Component({
   selector: 'app-users',
@@ -8,6 +9,8 @@ import { AuthUserService } from 'src/app/services/auth-user.service';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
+
+  public users: UserInterface[];
 
   constructor(private _usersServices: UserService) { }
 
@@ -20,7 +23,9 @@ export class UsersComponent implements OnInit {
    */
   public getAllUsers() {
     this._usersServices.getAllUsers().subscribe( dataUsers => {
-      console.log(dataUsers);
+
+      this.users = dataUsers;
+
     });
   }
 

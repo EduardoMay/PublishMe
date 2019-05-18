@@ -6,16 +6,35 @@
       <th>#</th>
       <th>Nombre</th>
       <th>Correo</th>
+      <th>Ingreso</th>
     </tr>
     
   </thead>
 
   <tbody>
 
-    <tr>
-      <td>1</td>
-      <td>-------</td>
-      <td>------------</td>
+    <tr *ngFor="let user of users; let i = index">
+      <td>
+
+        {{ i + 1 }}
+
+      </td>
+      <td>
+
+        {{ user.name }}
+
+      </td>
+      <td>
+
+        {{ user.email }}
+
+      </td>
+
+      <td>
+
+        Pendiente
+
+      </td>
     </tr>
 
   </tbody>
