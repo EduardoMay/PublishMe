@@ -16,9 +16,9 @@
 
     <div class="col-md-9 mx-auto">
 
-      <form class="form">
+      <form class="form" #formPublication="ngForm" (keyup.enter)="validationFormNewPublication(formPublication)" (submit)="validationFormNewPublication(formPublication)">
         <div class="form-group">
-          <textarea class="form-control" name="" id=""></textarea>
+          <textarea class="form-control" name="text-publication" [(ngModel)]="textPublication"></textarea>
         </div>
 
         <div class="form-group d-flex flex-row-reverse">
