@@ -25,10 +25,6 @@ export class ProfileEditComponent implements OnInit {
   public userName = '';
   public date = '';
 
-  // poder cambiar de pestaña
-  public switchPersonalDate = true;
-  public switchProfilePhoto = false;
-
   public statusForm = {
     name: false,
     lastName: false,
@@ -157,16 +153,5 @@ export class ProfileEditComponent implements OnInit {
   private isAuth() {
     return this._authService.isAuth();
   }
-
-  public buttonPersonalDate() {
-    this.switchPersonalDate = !this.switchPersonalDate;
-    this.switchProfilePhoto = false;
-  }
-
-  public buttonProfilePhoto() {
-    this.switchProfilePhoto = !this.switchProfilePhoto;
-    this.switchPersonalDate = false;
-  }
-
 
 }

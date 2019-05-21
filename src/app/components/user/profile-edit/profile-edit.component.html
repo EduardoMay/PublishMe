@@ -8,114 +8,136 @@
 
 <div class="container mt-4 border shadow rounded p-3">
   
-  <div class="row">
+  <h2><small>Opciones</small></h2>
 
-    <div class="col-md-4 border-right text-right">
+  <div class="accordion" id="accordionExample">
+    
+    <div class="card">
 
-      <h2><small>Opciones</small></h2>
-
-      <div class="dropdown-divider"></div>
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Datos Personales
+          </button>
+        </h2>
+      </div>
+  
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
       
-      <h4 class="text-color-primary cursor-pointer" (click)="buttonPersonalDate()"><small>Datos personales</small></h4>
+          <form #formPersonalDate="ngForm" (submit)="validateFormPersonalDate(formPersonalDate)">
+    
+              <div class="form-group row">
+                <label for="nombre" class="col-sm-2 col-form-label text-right">Nombre</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="nombre" placeholder="Nombre"
+                  [ngClass]="{'is-invalid': statusForm.name}"
+                  name="name" [(ngModel)]="name" required>
+                </div>
+              </div>
       
-      <div class="dropdown-divider"></div>
-
-      <h4 class="text-color-primary cursor-pointer" (click)="buttonProfilePhoto()"><small>Foto de perfil</small></h4>
+              <div class="form-group row">
+                <label for="apellido" class="col-sm-2 col-form-label text-right">Apellido</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="apellido" placeholder="Apellido"
+                  [ngClass]="{'is-invalid': statusForm.lastName}"
+                  name="last-name" [(ngModel)]="lastName" required>
+                </div>
+              </div>
       
+              <div class="form-group row">
+                <label for="usuario" class="col-sm-2 col-form-label text-right">Nombre de usuario</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="usuario" placeholder="Nombre de usuario"
+                  [ngClass]="{'is-invalid': statusForm.userName}"
+                  name="nameUser" [(ngModel)]="userName" required>
+                </div>
+              </div>
+      
+              <div class="form-group row">
+                <label for="date" class="col-sm-2 col-form-label text-right">Fecha de nacimiento</label>
+                <div class="col-sm-10">
+                  <input type="date" class="form-control" id="date"
+                  [ngClass]="{'is-invalid': statusForm.date}"
+                  name="date" [(ngModel)]="date" required>
+                </div>
+              </div>
+      
+              <div class="d-flex flex-row-reverse bd-highlight">
+                <div class="p-2 bd-highlight">
+                  <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                </div>
+              </div>
+      
+          </form>
+      
+        </div>
+      </div>
     </div>
     
-    <div class="col-md-8" *ngIf="switchPersonalDate">
-      
-      <h2><small>Datos Persoles</small></h2>
+    <div class="card">
 
-      <div class="dropdown-divider"></div>
+      <div class="card-header" id="headingTwo">
+        <h2 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Foto de perfil
+          </button>
+        </h2>
+      </div>
 
-      <form #formPersonalDate="ngForm" (submit)="validateFormPersonalDate(formPersonalDate)">
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body">
 
-        <div class="form-group row">
-          <label for="nombre" class="col-sm-2 col-form-label text-right">Nombre</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="nombre" placeholder="Nombre"
-            [ngClass]="{'is-invalid': statusForm.name}"
-            name="name" [(ngModel)]="name" required>
-          </div>
+          <form (submit)="uploadPhotoUser()">
+
+            <div class="form-group">
+              <input type="file" class="form-control" accept=".PNG .jpg"
+              (change)="savingPhotoToFIrestore($event)">
+            </div>
+    
+            <div class="progress mb-3">
+              <div [style.width]="(uploadPercent | async) + '%'"
+              class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                {{ uploadPercent | async }}
+              </div>
+            </div>
+    
+            <input type="hidden" #imageUser [value]="urlImage | async">
+    
+            <div class="d-flex flex-row-reverse bd-highlight">
+    
+              <div class="p-2 bd-highlight">
+                <button *ngIf="urlImage | async; else btnDisable"
+                  type="submit" class="btn btn-lg btn-primary btn-block">Guardar</button>
+              </div>
+    
+              <ng-template #btnDisable>
+                <button type="submit" disabled=true class="btn btn-lg btn-secondary btn-block">Guardar</button>
+              </ng-template>
+    
+            </div>
+    
+          </form>
+
         </div>
-
-        <div class="form-group row">
-          <label for="apellido" class="col-sm-2 col-form-label text-right">Apellido</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="apellido" placeholder="Apellido"
-            [ngClass]="{'is-invalid': statusForm.lastName}"
-            name="last-name" [(ngModel)]="lastName" required>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="usuario" class="col-sm-2 col-form-label text-right">Nombre de usuario</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="usuario" placeholder="Nombre de usuario"
-            [ngClass]="{'is-invalid': statusForm.userName}"
-            name="nameUser" [(ngModel)]="userName" required>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="date" class="col-sm-2 col-form-label text-right">Fecha de nacimiento</label>
-          <div class="col-sm-10">
-            <input type="date" class="form-control" id="date"
-            [ngClass]="{'is-invalid': statusForm.date}"
-            name="date" [(ngModel)]="date" required>
-          </div>
-        </div>
-
-        <div class="d-flex flex-row-reverse bd-highlight">
-          <div class="p-2 bd-highlight">
-            <button type="submit" class="btn btn-outline-primary">Guardar</button>
-          </div>
-        </div>
-
-      </form>
+      </div>
 
     </div>
 
-    <div class="col-md-8" *ngIf="switchProfilePhoto">
-      
-      <h2><small>Foto de Perfil</small></h2>
-
-      <div class="dropdown-divider"></div>
-
-      <form (submit)="uploadPhotoUser()">
-
-        <div class="form-group">
-          <input type="file" class="form-control" accept=".PNG .jpg"
-          (change)="savingPhotoToFIrestore($event)">
+    <!-- <div class="card">
+      <div class="card-header" id="headingThree">
+        <h2 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Collapsible Group Item #3
+          </button>
+        </h2>
+      </div>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+        <div class="card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
         </div>
-
-        <div class="progress mb-3">
-          <div [style.width]="(uploadPercent | async) + '%'"
-          class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-            {{ uploadPercent | async }}
-          </div>
-        </div>
-
-        <input type="hidden" #imageUser [value]="urlImage | async">
-
-        <div class="d-flex flex-row-reverse bd-highlight">
-
-          <div class="p-2 bd-highlight">
-            <button *ngIf="urlImage | async; else btnDisable"
-              type="submit" class="btn btn-lg btn-primary btn-block">Guardar</button>
-          </div>
-
-          <ng-template #btnDisable>
-            <button type="submit" disabled=true class="btn btn-lg btn-secondary btn-block">Guardar</button>
-          </ng-template>
-
-        </div>
-
-      </form>
-
-    </div>
+      </div>
+    </div> -->
 
   </div>
   
