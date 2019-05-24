@@ -15,18 +15,6 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.notKeyPressEnter();
-  }
-
-  /**
-   * bloquear la tecla 13/Enter
-   */
-  private notKeyPressEnter() {
-    $('form').keypress( e => {
-      if (e.keyCode === 13) {
-        return false;
-      }
-    });
   }
 
   /**
