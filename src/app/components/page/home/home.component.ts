@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { Publication } from 'src/app/models/publication';
+import { AuthUserService } from 'src/app/services/auth-user.service';
 
 declare var $: any;
 
@@ -12,13 +13,33 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit {
 
+  public ISAUTH = false;
+
   public textPublication: string;
   public publications: Publication[];
 
-  constructor(private _publicationService: DataService) { }
+  constructor(private _publicationService: DataService,
+    private _authService: AuthUserService) { }
 
   ngOnInit() {
+    // auth
+    this.isAuthUser();
+
+    // GET ALL PUBLICATIONS
     this.getAllPublications();
+  }
+
+  /**
+   * is auth
+   */
+  private isAuthUser() {
+    this._authService.isAuth().subscribe(auth => {
+
+      // STATUS LOGIN
+      this.ISAUTH = (auth) ? true : false;
+
+      console.log(this.ISAUTH);
+    });
   }
 
   /**
