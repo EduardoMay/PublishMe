@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { Publication } from 'src/app/models/publication';
 import { AuthUserService } from 'src/app/services/auth-user.service';
+import { UserInterface } from 'src/app/models/user';
 
 declare var $: any;
 
@@ -14,6 +15,7 @@ declare var $: any;
 export class HomeComponent implements OnInit {
 
   public ISAUTH = false;
+  private DATAUSER: UserInterface = {};
 
   public textPublication: string;
   public publications: Publication[];
@@ -38,6 +40,12 @@ export class HomeComponent implements OnInit {
       // STATUS LOGIN
       this.ISAUTH = (auth) ? true : false;
 
+      // USER ID
+      this.DATAUSER.id = (auth) ? auth.uid : null;
+
+      // USER ID
+      this.DATAUSER.username = (auth) ? auth.uid : null;
+
       console.log(this.ISAUTH);
     });
   }
@@ -55,10 +63,21 @@ export class HomeComponent implements OnInit {
    */
   public validationFormNewPublication(form: NgForm) {
     if (form.valid === true ) {
+      // USER MODEL INFO
+      const dataUser: Publication = {
+        userId: this.DATAUSER.id,
+        descripcion: this.textPublication,
+        autor: this.DATAUSER.username,
+        fecha: new Date().getTime(),
+      };
+
+      console.log(dataUser);
+
       // save new publication
+      // this._publicationService.addPublicatin();
     } else {
       // no text
-
+      console.log(false);
     }
   }
 
