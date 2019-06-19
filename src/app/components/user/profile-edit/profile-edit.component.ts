@@ -15,7 +15,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class ProfileEditComponent implements OnInit {
 
-  @ViewChild('imageUser') inputImageUser: ElementRef;
+  @ViewChild('imageUser', {static: false}) inputImageUser: ElementRef;
   private IDUSER: string;
   private USERNAME: string;
 
